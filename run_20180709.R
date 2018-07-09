@@ -62,12 +62,10 @@ downloadFileFunc <- function(remDr, year = year(Sys.time()), month = month(Sys.t
   return(TRUE)
 }
 
-downloadFileFunc(remDr, 2018, 4)
-
 st <- proc.time()
 CJ(year = 2015:2018, month = 1:12) %>>%
   with(mapply(function(y, m) downloadFileFunc(remDr, y, m), .$year, .$month)) %>>%
   invisible()
 elapsedTime <- proc.time() - st
-print(elapsedTime)
+print(elapsedTime) # 288.74 seconds
 rD$server$stop()
